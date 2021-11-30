@@ -89,17 +89,6 @@ def text_to_voice(user_text):
     bot.send_voice(user_text.chat.id , convert )
 
 #--------------------------------------------------------------------------------------#
-@bot.message_handler(commands=['qrcode'])
-def QRcode(message):
-    u_txt = bot.send_message(message.chat.id, 'لینک، آیدی یا متنی که قراره براش کد qr درست کنی رو بفرست...')
-    bot.register_next_step_handler(u_txt, imgQR)
-
-def imgQR(u_txt):
-    img = make(u_txt.text)
-    img.save('qrcode.png')
-    img = open('qrCode.png', 'rb')
-    bot.send_photo(u_txt.chat.id, img)
-#--------------------------------------------------------------------------------------#
 
 @bot.message_handler(commands=['max'])
 def Max(message):
@@ -127,7 +116,16 @@ def index_max(array):
 
 #--------------------------------------------------------------------------------------#
 
+@bot.message_handler(commands=['qrcode'])
+def QRcode(message):
+    u_txt = bot.send_message(message.chat.id, 'لینک، آیدی یا متنی که قراره براش کد qr درست کنی رو بفرست...')
+    bot.register_next_step_handler(u_txt, imgQR)
 
+def imgQR(u_txt):
+    img = make(u_txt.text)
+    img.save('qrcode.png')
+    img = open('qrCode.png', 'rb')
+    bot.send_photo(u_txt.chat.id, img)
     
 
 
