@@ -88,33 +88,10 @@ def text_to_voice(user_text):
     convert = open('voice.mp3' , 'rb')
     bot.send_voice(user_text.chat.id , convert )
 
-#--------------------------------------------------------------------------------------#
 
-@bot.message_handler(commands=['max'])
-def Max(message):
-    array = bot.send_message(message.chat.id, 'یک لیست از اعداد به فرمت زیر وارد کن\n14,7,78,15,8,19,20')
-    bot.register_next_step_handler(array, maxArry)
-
-def maxArry(array):
-    numbers = list(map(int,array.text.split(',')))
-    maximum = max(numbers)
-
-    bot.send_message(array.chat.id, "بزرگترین عدد : " + str(maximum))
 
 #--------------------------------------------------------------------------------------#
 
-@bot.message_handler(commands=['argmax'])
-def Argmax(message):
-    array = bot.send_message(message.chat.id, 'یک لیست از اعداد به فرمت زیر وارد کن\n14,7,78,15,8,19,20')
-    bot.register_next_step_handler(array, index_max)
-
-def index_max(array):
-    numbers = list(map(int,array.text.split(',')))
-    index = numbers.index(max(numbers)) + 1
-
-    bot.send_message(array.chat.id, str(index)+'مین عدد بزرگترین عدد است')
-
-#--------------------------------------------------------------------------------------#
 
 @bot.message_handler(commands=['qrcode'])
 def QRcode(message):
@@ -126,6 +103,31 @@ def imgQR(u_txt):
     img.save('qrcode.png')
     img = open('qrCode.png', 'rb')
     bot.send_photo(u_txt.chat.id, img)
+#--------------------------------------------------------------------------------------#
+
+
+@bot.message_handler(commands=['max'])
+def Max(message):
+    array = bot.send_message(message.chat.id, 'یک لیست از اعداد به فرمت زیر وارد کن\n14,7,78,15,8,19,20')
+    bot.register_next_step_handler(array, maxArry)
+#--------------------------------------------------------------------------------------#
+def maxArry(array):
+    numbers = list(map(int,array.text.split(',')))
+    maximum = max(numbers)
+
+    bot.send_message(array.chat.id, "بزرگترین عدد : " + str(maximum))
+@bot.message_handler(commands=['argmax'])
+def Argmax(message):
+    array = bot.send_message(message.chat.id, 'یک لیست از اعداد به فرمت زیر وارد کن\n14,7,78,15,8,19,20')
+    bot.register_next_step_handler(array, index_max)
+
+def index_max(array):
+    numbers = list(map(int,array.text.split(',')))
+    index = numbers.index(max(numbers)) + 1
+
+    bot.send_message(array.chat.id, str(index)+'مین عدد بزرگترین عدد است')
+
+
     
 
 
